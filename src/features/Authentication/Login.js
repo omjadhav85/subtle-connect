@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../../components";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="self-center mx-auto w-1/2 flex flex-col bg-white rounded-md p-4">
@@ -20,7 +22,7 @@ export const Login = () => {
         <form className="flex flex-col">
           <label for="">Email</label>
           <Input
-            type="text"
+            type="email"
             value={userName}
             onChangeHandler={(e) => setUserName(e.target.value)}
             placeholder="abc@xyz.com"
@@ -30,11 +32,19 @@ export const Login = () => {
             Password
           </label>
           <Input
-            type="password"
+            type={`${showPassword ? "text" : "password"}`}
             value={password}
             onChangeHandler={(e) => setPassword(e.target.value)}
             placeholder="*******"
             isRequired={true}
+            rightIcon={
+              showPassword ? (
+                <FaEye size={20} color="grey" />
+              ) : (
+                <FaEyeSlash size={20} color="grey" />
+              )
+            }
+            onRightIconClick={() => setShowPassword(!showPassword)}
           />
           <button
             className="mt-6 rounded-md p-3 bg-primary text-white"
@@ -45,7 +55,7 @@ export const Login = () => {
           <button className="mt-6 rounded-md p-3 border border-primary">
             Login as guest
           </button>
-          <Link to="/" className="mt-6 text-center underline">
+          <Link to="/signup" className="mt-6 text-center underline">
             Create account
           </Link>
         </form>

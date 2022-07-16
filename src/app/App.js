@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Login } from "../features";
+import { Login, Signup } from "../features";
 
 const App = () => {
   return (
@@ -7,8 +7,9 @@ const App = () => {
       <div className="min-h-screen flex justify-between">
         {/* <div>Side Menu Bar</div> */}
         <Routes>
-          <Route path="/" element={<h1 className="flex-1">Hello</h1>}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/" element={<h1 className="flex-1">Hello</h1>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
         {/* <div>Users to follow</div> */}
       </div>
