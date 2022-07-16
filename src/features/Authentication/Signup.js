@@ -36,7 +36,7 @@ export const Signup = () => {
                 onChangeHandler={(e) =>
                   setUserDetails({ ...userDetails, firstName: e.target.value })
                 }
-                placeholder="abc@xyz.com"
+                placeholder="Ken"
                 isRequired={true}
               />
             </div>
@@ -49,7 +49,7 @@ export const Signup = () => {
                 onChangeHandler={(e) =>
                   setUserDetails({ ...userDetails, lastName: e.target.value })
                 }
-                placeholder="abc@xyz.com"
+                placeholder="Adams"
                 isRequired={true}
               />
             </div>
