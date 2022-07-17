@@ -9,7 +9,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="self-center mx-auto w-1/2 flex flex-col bg-white rounded-md p-4">
+    <div className="self-center mx-auto w-1/2 flex flex-col bg-white rounded-md p-4 shadow-md">
       <heading className="mt-4 mb-2">
         <div className="text-3xl text-primary font-heading text-center">
           Welcome to Subtle Connect
