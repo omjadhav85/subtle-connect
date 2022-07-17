@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../../components";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Logo from "../../assets/social_media_logo.png";
 
 export const Login = () => {
   const [userName, setUserName] = useState("");
@@ -10,12 +11,16 @@ export const Login = () => {
 
   return (
     <div className="self-center mx-auto w-1/2 flex flex-col bg-white rounded-md p-4 shadow-md">
-      <heading className="mt-4 mb-2">
+      <heading className="mt-4 mb-2 flex items-center">
+        <div className="h-24 w-24">
+          <img src={Logo} alt="" />
+        </div>
+
         <div className="text-3xl text-primary font-heading text-center">
           Welcome to Subtle Connect
         </div>
       </heading>
-      <div className="p-8">
+      <div className="p-8 pt-0">
         <h1 className="text-2xl font-semibold pb-2 mb-6 text-center border-b border-primary">
           Sign In
         </h1>
