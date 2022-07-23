@@ -56,7 +56,7 @@ export const Login = () => {
                 type="text"
                 value={username}
                 onChangeHandler={(e) => setUsername(e.target.value)}
-                placeholder="abc@xyz.com"
+                placeholder="coolCoder123"
                 isRequired={true}
               />
               <label htmlFor="" className="mt-3">
