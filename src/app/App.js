@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Login, Signup } from "../features";
+import { Home, Login, Signup } from "../features";
 import { PrivateRoute } from "../components";
 import { Toaster } from "react-hot-toast";
 
@@ -8,7 +8,23 @@ const App = () => {
     <div className="min-h-screen flex container max-w-5xl mx-auto">
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/" element={<div className="flex-1">Homepage</div>} />
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/explore"
+            element={<div className="flex-1">Explore</div>}
+          />
+          <Route
+            path="/bookmarks"
+            element={<div className="flex-1">Bookmarks</div>}
+          />
+          <Route
+            path="/notifications"
+            element={<div className="flex-1">Notifications</div>}
+          />
+          <Route
+            path="/profile"
+            element={<div className="flex-1">Profile</div>}
+          />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
