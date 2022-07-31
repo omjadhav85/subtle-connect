@@ -1,4 +1,7 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { SideBar } from "../SideBar/SideBar";
+import { FollowBar } from "../FollowBar/FollowBar";
 
 export const PrivateRoute = ({ children }) => {
   return (
