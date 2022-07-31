@@ -1,5 +1,7 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { SideBar } from "../SideBar/SideBar";
+import { FollowBar } from "../FollowBar/FollowBar";
 
 export const PrivateRoute = () => {
   const { token } = useSelector((state) => state.auth);
@@ -7,9 +9,9 @@ export const PrivateRoute = () => {
 
   return token ? (
     <div className="flex-1 flex justify-between">
-      <div>Side Menu Bar</div>
+      <SideBar />
       <Outlet />
-      <div>Users to follow</div>
+      <FollowBar />
     </div>
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

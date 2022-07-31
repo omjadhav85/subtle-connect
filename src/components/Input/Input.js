@@ -8,9 +8,12 @@ export const Input = ({
   onLeftIconClick,
   rightIcon,
   onRightIconClick,
+  otherClasses,
 }) => {
   return (
-    <div className="flex gap-2 border p-2 mt-2 rounded-md items-center focus-within:ring-1 focus-within:ring-primary">
+    <div
+      className={`flex gap-2 border p-2 mt-2 rounded-md items-center focus-within:ring-1 focus-within:ring-primary ${otherClasses}`}
+    >
       {leftIcon && (
         <i onClick={onLeftIconClick} className="hover:cursor-pointer">
           {leftIcon}
