@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { MdOutlineBookmarkBorder, MdAdd, MdMoreVert } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CircleAvatar, Input } from "../../components";
 import { Comment } from "./Comment";
+import { deletePost } from "./postsSlice";
 
 export const Post = ({ post }) => {
   const {
@@ -17,9 +19,13 @@ export const Post = ({ post }) => {
 
   const postCreationDate = new Date(createdAt);
 
-  const { userData } = useSelector((state) => state.auth);
+  const { token, userData } = useSelector((state) => state.auth);
 
   const isOwnPost = userData.username === username;
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="flex flex-col p-4 rounded-md bg-white gap-4">
@@ -29,7 +35,27 @@ export const Post = ({ post }) => {
           <h1>{`User's Name @${username}`}</h1>
           <small>{`${postCreationDate.toLocaleDateString()}  ${postCreationDate.toLocaleTimeString()}`}</small>
         </div>
-        {isOwnPost && <MdMoreVert size={20} />}
+        {isOwnPost && (
+          <div className="relative">
+            <MdMoreVert
+              size={25}
+              className=" rounded-full cursor-pointer hover:bg-slate-200 p-1"
+              onClick={() => setShowMenu(!showMenu)}
+            />
+
+            {showMenu && (
+              <ul className="flex flex-col gap-2 absolute top-6 right-0 bg-background">
+                <li className="p-2 hover:bg-slate-300 cursor-pointer">Edit</li>
+                <li
+                  className="p-2 hover:bg-slate-300 cursor-pointer"
+                  onClick={() => dispatch(deletePost({ post, token }))}
+                >
+                  Delete
+                </li>
+              </ul>
+            )}
+          </div>
+        )}
       </div>
       <div>{content}</div>
       <div className="flex gap-4 ">

@@ -16,8 +16,7 @@ export const Home = () => {
   return (
     <div className="flex-1 flex flex-col mt-4 gap-4">
       <NewPost />
-      {postsStatus === "fulfilled" &&
-        allPosts.length > 0 &&
+      {allPosts.length > 0 &&
         allPosts.map((post) => <Post post={post} key={post._id} />)}
     </div>
   );

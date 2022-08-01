@@ -16,3 +16,13 @@ export const addPostService = (post, token) => {
     },
   });
 };
+
+export const deletePostService = (post, token) => {
+  return axios({
+    method: "delete",
+    url: `/api/posts/${post._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};

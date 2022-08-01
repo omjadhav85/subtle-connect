@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addPostService,
   getAllPostsService,
+  deletePostService,
 } from "../../utils/serverCalls/postCalls";
 import toast from "react-hot-toast";
 
@@ -27,6 +28,18 @@ export const addPost = createAsyncThunk(
   async ({ post, token }, thunkAPI) => {
     try {
       const res = await addPostService(post, token);
+      return res.data.posts;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async ({ post, token }, thunkAPI) => {
+    try {
+      const res = await deletePostService(post, token);
       return res.data.posts;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -61,6 +74,18 @@ export const postsSlice = createSlice({
     [addPost.rejected]: (state) => {
       state.postsStatus = "rejected";
       toast.error("Failed to add new post! Please try again.");
+    },
+    [deletePost.pending]: (state) => {
+      state.postsStatus = "pending";
+    },
+    [deletePost.fulfilled]: (state, { payload }) => {
+      state.postsStatus = "fulfilled";
+      state.allPosts = payload;
+      toast.success("Post deleted successfully!");
+    },
+    [deletePost.rejected]: (state) => {
+      state.postsStatus = "rejected";
+      toast.error("Failed to delete the post! Please try again.");
     },
   },
 });
