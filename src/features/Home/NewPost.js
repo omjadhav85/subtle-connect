@@ -1,24 +1,44 @@
-import { ButtonPrimary, CircleAvatar } from "../../components";
+import { ButtonPrimary, ButtonSecondary, CircleAvatar } from "../../components";
 import { MdOutlineImage, MdOutlineEmojiEmotions } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { addPost } from "./postsSlice";
+import { useEffect, useState } from "react";
+import { addPost, editPost } from "./postsSlice";
 
-export const NewPost = () => {
+export const NewPost = ({ oldPost, setShowModal }) => {
   const dispatch = useDispatch();
 
   const { userData, token } = useSelector((state) => state.auth);
 
-  const [newPost, setNewPost] = useState("");
+  const defaultPost = {
+    content: "",
+    comments: [],
+  };
+
+  const [newPost, setNewPost] = useState(defaultPost);
+  const [editMode, setEditMode] = useState(false);
 
   const addNoteHandler = (e) => {
     e.preventDefault();
-    console.log("adding new post");
-    if (newPost.length > 0) {
-      dispatch(addPost({ post: { content: newPost, comments: [] }, token }));
-      setNewPost("");
+    if (editMode) {
+      //TODO: edit the post
+      dispatch(editPost({ post: newPost, token }));
+      setEditMode(false);
+      setShowModal(false);
+    } else {
+      if (newPost.content.length > 0) {
+        dispatch(addPost({ post: newPost, token }));
+        setNewPost(defaultPost);
+      }
     }
   };
+
+  useEffect(() => {
+    // In case of edit mode, set the local newPost state to passed state i.e. old post
+    if (oldPost) {
+      setNewPost(oldPost);
+      setEditMode(true);
+    }
+  }, []);
 
   return (
     <div className="flex h-40 gap-4 bg-white p-4 rounded-md">
@@ -29,8 +49,8 @@ export const NewPost = () => {
           id=""
           placeholder="What's on your mind?"
           className="focus:outline-none p-2 bg-background rounded-md resize-none"
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
+          value={newPost.content}
+          onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
         ></textarea>
 
         <div className="flex justify-between items-center">
@@ -38,7 +58,22 @@ export const NewPost = () => {
             <MdOutlineImage size={20} />
             <MdOutlineEmojiEmotions size={20} />
           </div>
-          <ButtonPrimary text="Post" otherClasses="w-16 py-2" />
+          {editMode && (
+            <ButtonSecondary
+              text="Cancel"
+              otherClasses="py-2"
+              onClickHandler={(e) => {
+                e.preventDefault();
+                setShowModal(false);
+                setEditMode(false);
+              }}
+            />
+          )}
+          {editMode ? (
+            <ButtonPrimary text="Edit" otherClasses="w-16 py-2" />
+          ) : (
+            <ButtonPrimary text="Post" otherClasses="w-16 py-2" />
+          )}
         </div>
       </form>
     </div>

@@ -6,7 +6,7 @@ import { CircleAvatar, Input } from "../../components";
 import { Comment } from "./Comment";
 import { deletePost } from "./postsSlice";
 
-export const Post = ({ post }) => {
+export const Post = ({ post, setShowModal, setOldPost }) => {
   const {
     _id: postId,
     username,
@@ -45,7 +45,15 @@ export const Post = ({ post }) => {
 
             {showMenu && (
               <ul className="flex flex-col gap-2 absolute top-6 right-0 bg-background">
-                <li className="p-2 hover:bg-slate-300 cursor-pointer">Edit</li>
+                <li
+                  className="p-2 hover:bg-slate-300 cursor-pointer"
+                  onClick={() => {
+                    setShowModal(true);
+                    setOldPost(post);
+                  }}
+                >
+                  Edit
+                </li>
                 <li
                   className="p-2 hover:bg-slate-300 cursor-pointer"
                   onClick={() => dispatch(deletePost({ post, token }))}

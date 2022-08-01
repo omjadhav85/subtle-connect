@@ -3,6 +3,7 @@ import {
   addPostService,
   getAllPostsService,
   deletePostService,
+  editPostService,
 } from "../../utils/serverCalls/postCalls";
 import toast from "react-hot-toast";
 
@@ -40,6 +41,18 @@ export const deletePost = createAsyncThunk(
   async ({ post, token }, thunkAPI) => {
     try {
       const res = await deletePostService(post, token);
+      return res.data.posts;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const editPost = createAsyncThunk(
+  "posts/editPost",
+  async ({ post, token }, thunkAPI) => {
+    try {
+      const res = await editPostService(post, token);
       return res.data.posts;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -86,6 +99,18 @@ export const postsSlice = createSlice({
     [deletePost.rejected]: (state) => {
       state.postsStatus = "rejected";
       toast.error("Failed to delete the post! Please try again.");
+    },
+    [editPost.pending]: (state) => {
+      state.postsStatus = "pending";
+    },
+    [editPost.fulfilled]: (state, { payload }) => {
+      state.postsStatus = "fulfilled";
+      state.allPosts = payload;
+      toast.success("Post edited successfully!");
+    },
+    [editPost.rejected]: (state) => {
+      state.postsStatus = "rejected";
+      toast.error("Failed to edit the post! Please try again.");
     },
   },
 });
