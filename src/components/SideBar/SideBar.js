@@ -11,6 +11,8 @@ import { SideBarItem } from "./SideBarItem";
 import { NavLink } from "react-router-dom";
 import { CircleAvatar } from "../Avatar/CircleAvatar";
 import Logo from "../../assets/social_media_logo.png";
+import { useDispatch } from "react-redux";
+import { userLogout } from "../../features/Authentication/authSlice";
 
 export const SideBar = () => {
   const activeStyle = {
@@ -18,6 +20,7 @@ export const SideBar = () => {
     color: "#1D9BF0",
   };
 
+  const dispatch = useDispatch();
   return (
     <aside className="flex flex-col justify-between pb-6 w-1/4 sticky top-0 h-screen mr-4">
       <div>
@@ -67,7 +70,11 @@ export const SideBar = () => {
             <SideBarItem icon={<CgProfile size={25} />} text="Profile" />
           </NavLink>
         </ul>
-        <ButtonPrimary text="Create new post" otherClasses="w-full mt-4" />
+        <ButtonPrimary
+          text="Logout"
+          otherClasses="w-full mt-4"
+          onClickHandler={() => dispatch(userLogout())}
+        />
       </div>
       <div className="flex items-center gap-2">
         <CircleAvatar imgSrc="https://picsum.photos/200/200" />

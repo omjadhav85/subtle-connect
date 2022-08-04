@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  userData: localStorage.getItem("userData"),
+  userData: JSON.parse(localStorage.getItem("userData")),
   authStatus: null,
 };
 
@@ -43,6 +43,7 @@ export const authSlice = createSlice({
       state.userData = null;
       localStorage.removeItem("token");
       localStorage.removeItem("userData");
+      toast.success("Logout successful!");
     },
   },
   extraReducers: {
@@ -80,3 +81,5 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+
+export const { userLogout } = authSlice.actions;
