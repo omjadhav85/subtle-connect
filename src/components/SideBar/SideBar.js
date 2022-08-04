@@ -11,7 +11,7 @@ import { SideBarItem } from "./SideBarItem";
 import { NavLink } from "react-router-dom";
 import { CircleAvatar } from "../Avatar/CircleAvatar";
 import Logo from "../../assets/social_media_logo.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../features/Authentication/authSlice";
 
 export const SideBar = () => {
@@ -21,6 +21,8 @@ export const SideBar = () => {
   };
 
   const dispatch = useDispatch();
+
+  const { userData } = useSelector((state) => state.auth);
   return (
     <aside className="flex flex-col justify-between pb-6 w-1/4 sticky top-0 h-screen mr-4">
       <div>
@@ -77,10 +79,10 @@ export const SideBar = () => {
         />
       </div>
       <div className="flex items-center gap-2">
-        <CircleAvatar imgSrc="https://picsum.photos/200/200" />
+        <CircleAvatar imgSrc={userData.image} />
         <div className="flex-1">
-          <h1 className="font-semibold">Omkar Jadhav</h1>
-          <small>@omkarjadhav</small>
+          <h1 className="font-semibold">{`${userData.firstName} ${userData.lastName}`}</h1>
+          <small>{`@${userData.username}`}</small>
         </div>
         <MdMoreHoriz size={25} />
       </div>

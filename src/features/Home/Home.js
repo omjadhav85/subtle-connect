@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { getAllPosts } from "./postsSlice";
 import { PostModal } from "./PostModal";
+import { getAllUsers } from "../Users/usersSlice";
 
 export const Home = () => {
   const { allPosts, postsStatus } = useSelector((state) => state.posts);
@@ -14,8 +15,11 @@ export const Home = () => {
 
   const dispatch = useDispatch();
 
+  const { allUsers } = useSelector((state) => state.users);
+
   useEffect(() => {
     dispatch(getAllPosts());
+    dispatch(getAllUsers());
   }, []);
 
   return (
