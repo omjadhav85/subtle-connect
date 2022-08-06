@@ -39,3 +39,23 @@ export const editPostService = (post, token) => {
     },
   });
 };
+
+export const likePostService = (post, token) => {
+  return axios({
+    method: "post",
+    url: `/api/posts/like/${post._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};
+
+export const dislikePostService = (post, token) => {
+  return axios({
+    method: "post",
+    url: `/api/posts/dislike/${post._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};

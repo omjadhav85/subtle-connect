@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineBookmarkBorder, MdAdd, MdMoreVert } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CircleAvatar, Input } from "../../components";
 import { Comment } from "./Comment";
-import { deletePost } from "./postsSlice";
+import { deletePost, dislikePost, likePost } from "./postsSlice";
 
 export const Post = ({ post, setShowModal, setOldPost }) => {
   const {
@@ -21,7 +21,6 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
 
   const { token, userData } = useSelector((state) => state.auth);
   const { allUsers } = useSelector((state) => state.users);
-  // console.log(allUsers);
 
   const fullName = `${allUsers[username]?.firstName} ${allUsers[username]?.lastName}`;
 
@@ -30,6 +29,14 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const dispatch = useDispatch();
+
+  const isLiked = likes.likedBy.some((user) => user._id === userData._id);
+
+  const toggleLike = () => {
+    isLiked
+      ? dispatch(dislikePost({ post, token }))
+      : dispatch(likePost({ post, token }));
+  };
 
   return (
     <div className="flex flex-col p-4 rounded-md bg-white gap-4">
@@ -74,11 +81,14 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
       </div>
       <div>{content}</div>
       <div className="flex gap-4 ">
-        <div className="flex gap-2 items-center">
-          <AiOutlineHeart />
+        <div
+          className={`flex gap-2 items-center cursor-pointer`}
+          onClick={() => toggleLike()}
+        >
+          {isLiked ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
           <p>Like</p>
         </div>
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center cursor-pointer">
           <MdOutlineBookmarkBorder />
           <p>Bookmark</p>
         </div>
