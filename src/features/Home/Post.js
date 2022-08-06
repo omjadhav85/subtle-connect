@@ -20,6 +20,10 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
   const postCreationDate = new Date(createdAt);
 
   const { token, userData } = useSelector((state) => state.auth);
+  const { allUsers } = useSelector((state) => state.users);
+  // console.log(allUsers);
+
+  const fullName = `${allUsers[username]?.firstName} ${allUsers[username]?.lastName}`;
 
   const isOwnPost = userData.username === username;
 
@@ -30,9 +34,12 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
   return (
     <div className="flex flex-col p-4 rounded-md bg-white gap-4">
       <div className="flex gap-2">
-        <CircleAvatar imgSrc="https://picsum.photos/200/200" />
+        <CircleAvatar imgSrc={allUsers[username]?.image} />
         <div className="flex flex-col flex-1">
-          <h1>{`User's Name @${username}`}</h1>
+          <h1>
+            {fullName}{" "}
+            <span className="text-slate-400 text-sm">{` @${username}`}</span>
+          </h1>
           <small>{`${postCreationDate.toLocaleDateString()}  ${postCreationDate.toLocaleTimeString()}`}</small>
         </div>
         {isOwnPost && (
@@ -77,10 +84,7 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
         </div>
       </div>
       <div className="flex gap-4 items-center">
-        <CircleAvatar
-          imgSrc="https://picsum.photos/200/200"
-          otherClasses="w-10 h-10"
-        />
+        <CircleAvatar imgSrc={userData?.image} otherClasses="w-10 h-10" />
         <Input
           type="text"
           rightIcon={<MdAdd />}
@@ -89,7 +93,9 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
         />
       </div>
       {comments.length > 0 &&
-        comments.map((comment) => <Comment comment={comment} />)}
+        comments.map((comment) => (
+          <Comment comment={comment} key={comment._id} />
+        ))}
     </div>
   );
 };
