@@ -7,7 +7,7 @@ import { formatDate } from "../utils/authUtils";
 
 export const users = [
   {
-    _id: uuid(),
+    _id: JSON.parse(localStorage.getItem("userData"))?._id ?? uuid(), //only for default login, check id alrady id created and stored in local storage. If so, use that or create new id. This is to prevent having mismatch of id for same user in database and authStatus which comes from local storage
     firstName: "Omkar",
     lastName: "Jadhav",
     username: "omkarjadhav",

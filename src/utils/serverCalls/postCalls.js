@@ -39,3 +39,46 @@ export const editPostService = (post, token) => {
     },
   });
 };
+
+export const likePostService = (post, token) => {
+  return axios({
+    method: "post",
+    url: `/api/posts/like/${post._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};
+
+export const dislikePostService = (post, token) => {
+  return axios({
+    method: "post",
+    url: `/api/posts/dislike/${post._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};
+
+export const addCommentService = (post, comment, token) => {
+  return axios({
+    method: "post",
+    url: `/api/comments/add/${post._id}`,
+    data: {
+      commentData: { text: comment },
+    },
+    headers: {
+      authorization: token,
+    },
+  });
+};
+
+export const deleteCommentService = (post, comment, token) => {
+  return axios({
+    method: "delete",
+    url: `/api/comments/delete/${post._id}/${comment._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};

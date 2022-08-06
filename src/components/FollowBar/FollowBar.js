@@ -31,13 +31,9 @@ export const FollowBar = () => {
           .map(
             (user) =>
               user !== userData.username && (
-                <FollowBarItem user={allUsers[user]} />
+                <FollowBarItem user={allUsers[user]} key={user._id} />
               )
           )}
-        {/* <FollowBarItem />
-        <FollowBarItem />
-        <FollowBarItem />
-        <FollowBarItem /> */}
       </ul>
     </aside>
   );
