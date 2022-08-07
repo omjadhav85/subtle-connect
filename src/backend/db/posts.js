@@ -43,6 +43,54 @@ export const posts = [
   },
   {
     _id: uuid(),
+    content: "I aspire to be an SDE in a FAANG company one day.",
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "charubangal",
+
+    comments: [
+      {
+        _id: uuid(),
+        username: "omkarjadhav",
+        text: "All the best!",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content: "I love Javascript",
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "rohanbordekar",
+
+    comments: [
+      {
+        _id: uuid(),
+        username: "omkarjadhav",
+        text: "me too!",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
     content: "Naruto is THE best!",
     likes: {
       likeCount: 0,
