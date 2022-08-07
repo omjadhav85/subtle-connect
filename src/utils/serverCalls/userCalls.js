@@ -13,3 +13,23 @@ export const followUserService = (userToFollow, token) => {
     },
   });
 };
+
+export const bookmarkService = (post, token) => {
+  return axios({
+    method: "post",
+    url: `/api/users/bookmark/${post._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};
+
+export const removeBookmarkService = (post, token) => {
+  return axios({
+    method: "post",
+    url: `/api/users/remove-bookmark/${post._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};

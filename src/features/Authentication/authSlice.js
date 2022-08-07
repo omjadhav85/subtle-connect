@@ -5,7 +5,11 @@ import {
   updateUserService,
 } from "../../utils/serverCalls/authCalls";
 import toast from "react-hot-toast";
-import { followUser } from "../Users/usersSlice";
+import {
+  followUser,
+  bookmarkPost,
+  removeBookmarkPost,
+} from "../Users/usersSlice";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -113,6 +117,24 @@ export const authSlice = createSlice({
       state.authStatus = "fulfilled";
       state.userData = payload.user;
       localStorage.setItem("userData", JSON.stringify(payload.user));
+    },
+    [bookmarkPost.fulfilled]: (state, { payload }) => {
+      const { user, updatedBookmarks } = payload;
+      state.authStatus = "fulfilled";
+      state.userData.bookmarks = updatedBookmarks;
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ ...user, bookmarks: updatedBookmarks })
+      );
+    },
+    [removeBookmarkPost.fulfilled]: (state, { payload }) => {
+      const { user, updatedBookmarks } = payload;
+      state.authStatus = "fulfilled";
+      state.userData.bookmarks = updatedBookmarks;
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ ...user, bookmarks: updatedBookmarks })
+      );
     },
   },
 });

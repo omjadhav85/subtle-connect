@@ -56,7 +56,7 @@ export const SideBar = () => {
               text="Bookmarks"
             />
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/notifications"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
@@ -64,7 +64,7 @@ export const SideBar = () => {
               icon={<MdOutlineNotificationsNone size={25} />}
               text="Notifications"
             />
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/profile"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
