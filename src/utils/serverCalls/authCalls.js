@@ -18,3 +18,16 @@ export const signupUser = async (username, password, otherDetails) => {
 
   return res;
 };
+
+export const updateUserService = (userData, token) => {
+  return axios({
+    method: "post",
+    url: "/api/users/edit",
+    data: {
+      userData,
+    },
+    headers: {
+      authorization: token,
+    },
+  });
+};

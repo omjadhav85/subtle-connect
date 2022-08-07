@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginUser, signupUser } from "../../utils/serverCalls/authCalls";
+import {
+  loginUser,
+  signupUser,
+  updateUserService,
+} from "../../utils/serverCalls/authCalls";
 import toast from "react-hot-toast";
+import { followUser } from "../Users/usersSlice";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -28,6 +33,18 @@ export const userSignup = createAsyncThunk(
       const res = await signupUser(username, password, { firstName, lastName });
 
       return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "auth/updateUser",
+  async ({ userData, token }, thunkAPI) => {
+    try {
+      const res = await updateUserService(userData, token);
+      return res.data.user;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
@@ -76,6 +93,26 @@ export const authSlice = createSlice({
     [userSignup.rejected]: (state) => {
       state.authStatus = "rejected";
       toast.error("Signup failed! Please check your credentials.");
+    },
+    [updateUser.pending]: (state) => {
+      state.authStatus = "pending";
+    },
+    [updateUser.fulfilled]: (state, { payload }) => {
+      state.authStatus = "fulfilled";
+      state.userData = payload;
+      localStorage.setItem("userData", JSON.stringify(payload));
+      // toast.success("Signup successful!");
+    },
+    [updateUser.rejected]: (state) => {
+      state.authStatus = "rejected";
+      toast.error("Update user failed! Please try again.");
+    },
+
+    // Note: This is to change userData in authSlice once changes are made in allUsers of usersSlice
+    [followUser.fulfilled]: (state, { payload }) => {
+      state.authStatus = "fulfilled";
+      state.userData = payload.user;
+      localStorage.setItem("userData", JSON.stringify(payload.user));
     },
   },
 });
