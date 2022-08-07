@@ -3,8 +3,13 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineBookmarkBorder, MdAdd, MdMoreVert } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CircleAvatar, Input } from "../../components";
-import { Comment } from "./Comment";
-import { addComment, deletePost, dislikePost, likePost } from "./postsSlice";
+import { Comment } from "../../features/Home/Comment";
+import {
+  addComment,
+  deletePost,
+  dislikePost,
+  likePost,
+} from "../../features/Home/postsSlice";
 
 export const Post = ({ post, setShowModal, setOldPost }) => {
   const {

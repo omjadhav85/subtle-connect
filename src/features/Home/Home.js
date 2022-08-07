@@ -1,9 +1,7 @@
-import { NewPost } from "./NewPost";
-import { Post } from "./Post";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { getAllPosts } from "./postsSlice";
-import { PostModal } from "./PostModal";
+import { Post, NewPost, PostModal } from "../../components/";
 import { getAllUsers } from "../Users/usersSlice";
 
 export const Home = () => {

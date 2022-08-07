@@ -2,7 +2,7 @@ import { ButtonPrimary, ButtonSecondary, CircleAvatar } from "../../components";
 import { MdOutlineImage, MdOutlineEmojiEmotions } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { addPost, editPost } from "./postsSlice";
+import { addPost, editPost } from "../../features/Home/postsSlice";
 
 export const NewPost = ({ oldPost, setShowModal }) => {
   const dispatch = useDispatch();
