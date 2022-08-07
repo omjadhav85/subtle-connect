@@ -2,8 +2,19 @@ import { Routes, Route } from "react-router-dom";
 import { Home, Login, Signup, Explore, Bookmarks } from "../features";
 import { PrivateRoute } from "../components";
 import { Toaster } from "react-hot-toast";
+import { getAllUsers } from "../features/Users/usersSlice";
+import { getAllPosts } from "../features/Home/postsSlice";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+    dispatch(getAllUsers());
+  }, []);
+
   return (
     <div className="min-h-screen flex container max-w-5xl mx-auto">
       <Routes>
