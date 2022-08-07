@@ -1,7 +1,7 @@
 import { CircleAvatar } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { MdMoreVert } from "react-icons/md";
 import { deleteComment } from "./postsSlice";
 
@@ -16,16 +16,27 @@ export const Comment = ({ comment, post }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className="flex gap-4 items-center">
       <CircleAvatar
         imgSrc={allUsers[comment.username]?.image}
-        otherClasses="w-10 h-10"
+        otherClasses="w-10 h-10 cursor-pointer"
+        onClickHandler={() =>
+          navigate(`/profile/${allUsers[comment.username]._id}`)
+        }
       />
       <div className="flex-1 flex rounded-md bg-background p-2">
         <div className="flex-1 flex flex-col ">
-          <h1 className="font-semibold">{fullName}</h1>
+          <h1
+            className="font-semibold cursor-pointer"
+            onClick={() =>
+              navigate(`/profile/${allUsers[comment.username]._id}`)
+            }
+          >
+            {fullName}
+          </h1>
           <p>{comment.text}</p>
         </div>
         {isOwnComment && (

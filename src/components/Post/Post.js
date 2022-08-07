@@ -7,6 +7,7 @@ import {
   MdBookmark,
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { CircleAvatar, Input } from "../../components";
 import { Comment } from "../../features/Home/Comment";
 import {
@@ -68,12 +69,21 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
     setComment("");
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col p-4 rounded-md bg-white gap-4">
       <div className="flex gap-2">
-        <CircleAvatar imgSrc={allUsers[username]?.image} />
+        <CircleAvatar
+          imgSrc={allUsers[username]?.image}
+          onClickHandler={() => navigate(`/profile/${allUsers[username]._id}`)}
+          otherClasses="cursor-pointer"
+        />
         <div className="flex flex-col flex-1">
-          <h1>
+          <h1
+            onClick={() => navigate(`/profile/${allUsers[username]._id}`)}
+            className="cursor-pointer"
+          >
             {fullName}{" "}
             <span className="text-slate-400 text-sm">{` @${username}`}</span>
           </h1>

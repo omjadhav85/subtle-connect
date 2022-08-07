@@ -33,3 +33,7 @@ export const removeBookmarkService = (post, token) => {
     },
   });
 };
+
+export const getUserDetailService = (userId) => {
+  return axios.get(`/api/users/${userId}`);
+};

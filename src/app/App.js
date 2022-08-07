@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Login, Signup, Explore, Bookmarks } from "../features";
+import { Home, Login, Signup, Explore, Bookmarks, Profile } from "../features";
 import { PrivateRoute } from "../components";
 import { Toaster } from "react-hot-toast";
 import { getAllUsers } from "../features/Profile/usersSlice";
@@ -26,10 +26,7 @@ const App = () => {
             path="/notifications"
             element={<div className="flex-1">Notifications</div>}
           />
-          <Route
-            path="/profile"
-            element={<div className="flex-1">Profile</div>}
-          />
+          <Route path="/profile/:profileId" element={<Profile />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

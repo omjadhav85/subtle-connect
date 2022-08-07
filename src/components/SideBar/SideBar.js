@@ -66,7 +66,7 @@ export const SideBar = () => {
             />
           </NavLink> */}
           <NavLink
-            to="/profile"
+            to={`/profile/${userData._id}`}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             <SideBarItem icon={<CgProfile size={25} />} text="Profile" />
