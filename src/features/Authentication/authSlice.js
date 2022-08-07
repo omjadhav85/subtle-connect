@@ -9,7 +9,7 @@ import {
   followUser,
   bookmarkPost,
   removeBookmarkPost,
-} from "../Users/usersSlice";
+} from "../Profile/usersSlice";
 
 const initialState = {
   token: localStorage.getItem("token"),

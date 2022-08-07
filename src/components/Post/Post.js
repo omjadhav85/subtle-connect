@@ -18,7 +18,7 @@ import {
 import {
   bookmarkPost,
   removeBookmarkPost,
-} from "../../features/Users/usersSlice";
+} from "../../features/Profile/usersSlice";
 
 export const Post = ({ post, setShowModal, setOldPost }) => {
   const {

@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Home, Login, Signup, Explore, Bookmarks } from "../features";
 import { PrivateRoute } from "../components";
 import { Toaster } from "react-hot-toast";
-import { getAllUsers } from "../features/Users/usersSlice";
+import { getAllUsers } from "../features/Profile/usersSlice";
 import { getAllPosts } from "../features/Home/postsSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";

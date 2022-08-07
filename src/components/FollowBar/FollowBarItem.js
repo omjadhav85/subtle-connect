@@ -1,7 +1,7 @@
 import { CircleAvatar } from "../Avatar/CircleAvatar";
 import { MdAdd } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { followUser } from "../../features/Users/usersSlice";
+import { followUser } from "../../features/Profile/usersSlice";
 
 export const FollowBarItem = ({ user }) => {
   const fullName = `${user.firstName} ${user.lastName}`;
