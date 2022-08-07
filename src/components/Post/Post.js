@@ -1,10 +1,24 @@
 import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { MdOutlineBookmarkBorder, MdAdd, MdMoreVert } from "react-icons/md";
+import {
+  MdOutlineBookmarkBorder,
+  MdAdd,
+  MdMoreVert,
+  MdBookmark,
+} from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CircleAvatar, Input } from "../../components";
-import { Comment } from "./Comment";
-import { addComment, deletePost, dislikePost, likePost } from "./postsSlice";
+import { Comment } from "../../features/Home/Comment";
+import {
+  addComment,
+  deletePost,
+  dislikePost,
+  likePost,
+} from "../../features/Home/postsSlice";
+import {
+  bookmarkPost,
+  removeBookmarkPost,
+} from "../../features/Users/usersSlice";
 
 export const Post = ({ post, setShowModal, setOldPost }) => {
   const {
@@ -34,10 +48,18 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
 
   const isLiked = likes.likedBy.some((user) => user._id === userData._id);
 
+  const isBookmarked = userData.bookmarks.some((item) => item._id === post._id);
+
   const toggleLike = () => {
     isLiked
       ? dispatch(dislikePost({ post, token }))
       : dispatch(likePost({ post, token }));
+  };
+
+  const toggleBookmark = () => {
+    isBookmarked
+      ? dispatch(removeBookmarkPost({ user: userData, post, token }))
+      : dispatch(bookmarkPost({ user: userData, post, token }));
   };
 
   const handleAddComment = (e) => {
@@ -96,8 +118,16 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
           {isLiked ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
           <p>Like</p>
         </div>
-        <div className="flex gap-2 items-center cursor-pointer">
-          <MdOutlineBookmarkBorder />
+        <div
+          className="flex gap-2 items-center cursor-pointer"
+          onClick={() => toggleBookmark()}
+        >
+          {isBookmarked ? (
+            <MdBookmark color="red" />
+          ) : (
+            <MdOutlineBookmarkBorder />
+          )}
+
           <p>Bookmark</p>
         </div>
       </div>
