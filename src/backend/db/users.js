@@ -15,6 +15,8 @@ export const users = [
     image: "https://avatars.dicebear.com/api/adventurer/oj.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Otaku | Naruto Fan | Love coding and solving problems",
+    portfolioUrl: "https://omkarjadhav.netlify.com",
   },
   {
     _id: uuid(),
@@ -25,6 +27,8 @@ export const users = [
     image: "https://avatars.dicebear.com/api/adventurer/cb.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Hello! I am Charu. Nice to meet you!",
+    portfolioUrl: "https://charu.netlify.com",
   },
   {
     _id: uuid(),
@@ -35,6 +39,8 @@ export const users = [
     image: "https://avatars.dicebear.com/api/adventurer/rb.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Hello! I am Rohan. Nice to meet you!",
+    portfolioUrl: "https://rohan.netlify.com",
   },
   {
     _id: uuid(),
@@ -45,6 +51,8 @@ export const users = [
     image: "https://avatars.dicebear.com/api/adventurer/ab.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Hello! I am Adarsh. Nice to meet you!",
+    portfolioUrl: "https://adarshbalika.netlify.com",
   },
   {
     _id: uuid(),
@@ -55,6 +63,8 @@ export const users = [
     image: "https://avatars.dicebear.com/api/adventurer/ss.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Hello! I am Shubham. Nice to meet you!",
+    portfolioUrl: "https://shubham.netlify.com",
   },
   {
     _id: uuid(),
@@ -65,5 +75,7 @@ export const users = [
     image: "https://avatars.dicebear.com/api/adventurer/ss2.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Hello! I am Soham. Nice to meet you!",
+    portfolioUrl: "https://soham.netlify.com",
   },
 ];

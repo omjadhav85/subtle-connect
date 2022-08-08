@@ -5,9 +5,11 @@ import {
   followUserService,
   getAllUsersService,
   removeBookmarkService,
+  unfollowUserService,
 } from "../../utils/serverCalls/userCalls";
 
 import { getUserMapping } from "../../utils/helpers";
+import { updateUser } from "../Authentication/authSlice";
 
 const initialState = {
   allUsers: {},
@@ -28,9 +30,21 @@ export const getAllUsers = createAsyncThunk(
 
 export const followUser = createAsyncThunk(
   "users/followUser",
-  async ({ userToFollow, dispatch, token }, thunkAPI) => {
+  async ({ userToFollow, token }, thunkAPI) => {
     try {
       const res = await followUserService(userToFollow, token);
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const unfollowUser = createAsyncThunk(
+  "users/unfollowUser",
+  async ({ userToUnfollow, token }, thunkAPI) => {
+    try {
+      const res = await unfollowUserService(userToUnfollow, token);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -92,6 +106,20 @@ export const usersSlice = createSlice({
       state.usersStatus = "rejected";
       toast.error("Failed to follow user! Please try again.");
     },
+    [unfollowUser.pending]: (state) => {
+      state.usersStatus = "pending";
+    },
+    [unfollowUser.fulfilled]: (state, { payload }) => {
+      state.usersStatus = "fulfilled";
+      const { user, followUser } = payload;
+      state.allUsers[user.username] = user;
+      state.allUsers[followUser.username] = followUser;
+      toast.success(`You have unfollowed @${followUser.username}`);
+    },
+    [unfollowUser.rejected]: (state) => {
+      state.usersStatus = "rejected";
+      toast.error("Failed to unfollow user! Please try again.");
+    },
     [bookmarkPost.pending]: (state) => {
       state.usersStatus = "pending";
     },
@@ -118,6 +146,10 @@ export const usersSlice = createSlice({
       state.usersStatus = "rejected";
       toast.error("Failed to remove bookmark! Please try again.");
     },
+    // [updateUser.fulfilled]: (state, { payload }) => {
+    //   state.usersStatus = "fulfilled";
+    //   state.allUsers[payload.username] = payload;
+    // },
   },
 });
 
