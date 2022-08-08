@@ -9,6 +9,7 @@ import {
   followUser,
   bookmarkPost,
   removeBookmarkPost,
+  unfollowUser,
 } from "../Profile/usersSlice";
 
 const initialState = {
@@ -114,6 +115,11 @@ export const authSlice = createSlice({
 
     // Note: This is to change userData in authSlice once changes are made in allUsers of usersSlice
     [followUser.fulfilled]: (state, { payload }) => {
+      state.authStatus = "fulfilled";
+      state.userData = payload.user;
+      localStorage.setItem("userData", JSON.stringify(payload.user));
+    },
+    [unfollowUser.fulfilled]: (state, { payload }) => {
       state.authStatus = "fulfilled";
       state.userData = payload.user;
       localStorage.setItem("userData", JSON.stringify(payload.user));

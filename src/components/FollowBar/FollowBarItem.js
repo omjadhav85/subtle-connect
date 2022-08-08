@@ -30,9 +30,7 @@ export const FollowBarItem = ({ user }) => {
       <MdAdd
         size={25}
         className="text-primary cursor-pointer"
-        onClick={() =>
-          dispatch(followUser({ userToFollow: user, token, dispatch }))
-        }
+        onClick={() => dispatch(followUser({ userToFollow: user, token }))}
       />
     </div>
   );

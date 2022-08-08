@@ -116,6 +116,13 @@ export function makeServer({ environment = "development" } = {}) {
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
       );
+
+      // This is for allowing external api calls. If not coded, it gives error while calling cloudinary api while editing profile image
+      this.passthrough();
+      this.passthrough(
+        "https://api.cloudinary.com/v1_1/omjcloud/image/upload",
+        ["post"]
+      );
     },
   });
 }

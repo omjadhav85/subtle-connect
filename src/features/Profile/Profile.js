@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   ButtonPrimary,
@@ -10,15 +10,20 @@ import {
   PostModal,
 } from "../../components";
 import { getUserDetailService } from "../../utils/serverCalls/userCalls";
+import { EditProfile } from "./EditProfile";
+import { followUser, unfollowUser } from "./usersSlice";
 
 export const Profile = () => {
   const { profileId } = useParams();
-  const { userData } = useSelector((state) => state.auth);
+  const { userData, token } = useSelector((state) => state.auth);
   const { allPosts } = useSelector((state) => state.posts);
 
   const [profileDetails, setProfileDetails] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [oldPost, setOldPost] = useState({});
+
+  const dispatch = useDispatch();
 
   const {
     username = "",
@@ -71,11 +76,24 @@ export const Profile = () => {
         <h1 className="text-xl font-bold">{`${firstName} ${lastName}`}</h1>
         <p>{`@${username}`}</p>
         {isOwnProfile ? (
-          <ButtonSecondary text="Edit Profile" />
+          <ButtonSecondary
+            text="Edit Profile"
+            onClickHandler={() => setShowEditProfile(true)}
+          />
         ) : isAlreadyFollowed ? (
-          <ButtonSecondary text="Unfollow" />
+          <ButtonSecondary
+            text="Unfollow"
+            onClickHandler={() =>
+              dispatch(unfollowUser({ userToUnfollow: profileDetails, token }))
+            }
+          />
         ) : (
-          <ButtonPrimary text="Follow" />
+          <ButtonPrimary
+            text="Follow"
+            onClickHandler={() =>
+              dispatch(followUser({ userToFollow: profileDetails, token }))
+            }
+          />
         )}
         <p>{bio}</p>
         <a href={portfolioUrl} target="_blank">
@@ -114,6 +132,10 @@ export const Profile = () => {
           setOldPost={setOldPost}
           setShowModal={setShowModal}
         />
+      )}
+
+      {showEditProfile && (
+        <EditProfile setShowEditProfile={setShowEditProfile} />
       )}
     </div>
   );

@@ -14,6 +14,16 @@ export const followUserService = (userToFollow, token) => {
   });
 };
 
+export const unfollowUserService = (userToUnfollow, token) => {
+  return axios({
+    method: "post",
+    url: `/api/users/unfollow/${userToUnfollow._id}`,
+    headers: {
+      authorization: token,
+    },
+  });
+};
+
 export const bookmarkService = (post, token) => {
   return axios({
     method: "post",
