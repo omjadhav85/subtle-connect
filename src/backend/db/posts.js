@@ -38,8 +38,8 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2022-09-18T00:17:31+05:30",
+    updatedAt: "2022-09-18T00:17:31+05:30",
   },
   {
     _id: uuid(),
@@ -62,8 +62,8 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2022-09-19T00:17:31+05:30",
+    updatedAt: "2022-09-19T00:17:31+05:30",
   },
   {
     _id: uuid(),
@@ -86,8 +86,8 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2022-09-15T00:17:31+05:30",
+    updatedAt: "2022-09-15T00:17:31+05:30",
   },
   {
     _id: uuid(),
@@ -98,8 +98,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2022-09-17T00:17:31+05:30",
+    updatedAt: "2022-09-17T00:17:31+05:30",
     comments: [
       {
         _id: uuid(),
