@@ -20,7 +20,6 @@ export const NewPost = ({ oldPost, setShowModal }) => {
   const addNoteHandler = (e) => {
     e.preventDefault();
     if (editMode) {
-      //TODO: edit the post
       dispatch(editPost({ post: newPost, token }));
       setEditMode(false);
       setShowModal(false);
@@ -55,8 +54,8 @@ export const NewPost = ({ oldPost, setShowModal }) => {
 
         <div className="flex justify-between items-center">
           <div className="flex gap-2 text-primary">
-            <MdOutlineImage size={20} />
-            <MdOutlineEmojiEmotions size={20} />
+            {/* <MdOutlineImage size={20} />
+            <MdOutlineEmojiEmotions size={20} /> */}
           </div>
           {editMode && (
             <ButtonSecondary

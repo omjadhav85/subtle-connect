@@ -24,7 +24,7 @@ export const Input = ({
         value={value}
         onChange={(e) => onChangeHandler(e)}
         placeholder={placeholder}
-        className="flex-1 focus:outline-none"
+        className="flex-1 focus:outline-none w-full"
         required={isRequired}
       />
       {rightIcon && (

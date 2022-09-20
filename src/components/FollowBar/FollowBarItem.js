@@ -1,7 +1,7 @@
 import { CircleAvatar } from "../Avatar/CircleAvatar";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdCheck } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { followUser } from "../../features/Profile/usersSlice";
+import { followUser, unfollowUser } from "../../features/Profile/usersSlice";
 import { useNavigate } from "react-router-dom";
 
 export const FollowBarItem = ({ user }) => {
@@ -9,9 +9,13 @@ export const FollowBarItem = ({ user }) => {
 
   const dispatch = useDispatch();
 
-  const { token } = useSelector((state) => state.auth);
+  const { token, userData } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
+
+  const isAlreadyFollowed = userData.following.some(
+    (userAlreadyFollowed) => userAlreadyFollowed.username === user.username
+  );
 
   return (
     <div className="flex items-center gap-2 border-b pb-2 ">
@@ -27,11 +31,21 @@ export const FollowBarItem = ({ user }) => {
         <h1 className="font-semibold">{fullName}</h1>
         <small>{`@${user.username}`}</small>
       </div>
-      <MdAdd
-        size={25}
-        className="text-primary cursor-pointer"
-        onClick={() => dispatch(followUser({ userToFollow: user, token }))}
-      />
+      {isAlreadyFollowed ? (
+        <MdCheck
+          size={25}
+          className="text-primary cursor-pointer"
+          onClick={() =>
+            dispatch(unfollowUser({ userToUnfollow: user, token }))
+          }
+        />
+      ) : (
+        <MdAdd
+          size={25}
+          className="text-primary cursor-pointer"
+          onClick={() => dispatch(followUser({ userToFollow: user, token }))}
+        />
+      )}
     </div>
   );
 };

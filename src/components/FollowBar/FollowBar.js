@@ -18,6 +18,18 @@ export const FollowBar = () => {
     (user) => user !== userData.username && !checkIsAlreadyFollowed(user)
   );
 
+  let userSearchList = [];
+
+  if (text.length > 0) {
+    userSearchList = Object.keys(allUsers).filter(
+      (user) =>
+        user.toLowerCase().includes(text.toLowerCase()) ||
+        (allUsers[user].firstName + allUsers[user].lastName)
+          .toLowerCase()
+          .includes(text.toLowerCase())
+    );
+  }
+
   return (
     <aside className="flex flex-col  py-6 w-1/4 sticky top-0 h-screen ml-4">
       <Input
@@ -27,13 +39,18 @@ export const FollowBar = () => {
         placeholder="Search users"
         isRequired={true}
         leftIcon={<MdSearch size={25} />}
-        // onRightIconClick={() => setShowPassword(!showPassword)}
         otherClasses="mb-4 bg-white"
       />
       <ul className="flex flex-col gap-4 bg-white p-4 rounded-md">
-        {followSuggestions.slice(0, 5).map((user) => (
-          <FollowBarItem user={allUsers[user]} key={user} />
-        ))}
+        {text.length > 0
+          ? userSearchList
+              .slice(0, 5)
+              .map((user) => <FollowBarItem user={allUsers[user]} key={user} />)
+          : followSuggestions
+              .slice(0, 5)
+              .map((user) => (
+                <FollowBarItem user={allUsers[user]} key={user} />
+              ))}
       </ul>
     </aside>
   );
