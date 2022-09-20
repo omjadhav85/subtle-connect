@@ -26,7 +26,6 @@ export const EditProfile = ({ setShowEditProfile }) => {
 
       const data = await res.json();
 
-      console.log(data);
       setEditDetails({ ...editDetails, image: data.url });
     } catch (err) {
       console.log(err);

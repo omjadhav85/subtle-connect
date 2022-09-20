@@ -36,8 +36,6 @@ export const Profile = () => {
     portfolioUrl = "",
   } = profileDetails;
 
-  //   console.log({ profileId });
-
   const userPosts = allPosts.filter((post) => post.username === username);
   const isOwnProfile = profileId === userData._id;
   let isAlreadyFollowed = false;
@@ -58,10 +56,8 @@ export const Profile = () => {
     };
 
     if (isOwnProfile) {
-      console.log("no server call made...using userData");
       setProfileDetails(userData);
     } else {
-      console.log("different user...making server call for details");
       getProfileDetails(profileId);
     }
   }, [userData, profileId]);
