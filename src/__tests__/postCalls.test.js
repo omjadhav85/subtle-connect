@@ -8,7 +8,6 @@ describe("this test is for all api calls on post actions", () => {
   test("this api should get all posts and set the state", async () => {
     //  set mock response first
 
-    // console.log("store", store);
     const expectedState = [
       {
         _id: "400b4e5a-21a1-46e6-bc8f-bf9e1167a9b1",
@@ -45,17 +44,24 @@ describe("this test is for all api calls on post actions", () => {
         id: "1",
       },
     ];
+
+    // mocking api get call response with our own data
     axios.get.mockResolvedValue({ data: { posts: expectedState } });
 
+    // actually calling our dispatch to call api(but will actually get mock data and not actually hit api)
+    // and then setting our state. Used store.dispatch as useDispatch does not work here
     const result = await store.dispatch(getAllPosts());
 
-    // console.log("result", result);
+    // our result is an object with type and payload and some other irrelevant meta data
     const allPosts = result.payload;
 
-    console.log(result);
+    // First check if the type of response is fulfilled or not
     expect(result.type).toEqual("posts/getAllPosts/fulfilled");
+
+    // Now check if we have received the correct data in our payload or not
     expect(allPosts).toEqual(expectedState);
 
+    // Now check if our state has updated or not
     const state = store.getState().posts;
     expect(state).toEqual({
       allPosts: expectedState,
