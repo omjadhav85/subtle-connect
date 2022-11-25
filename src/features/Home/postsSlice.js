@@ -11,7 +11,7 @@ import {
 } from "../../utils/serverCalls/postCalls";
 import toast from "react-hot-toast";
 
-const initialState = {
+export const initialState = {
   allPosts: [],
   postsStatus: "",
 };

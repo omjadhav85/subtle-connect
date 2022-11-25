@@ -11,8 +11,12 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllPosts());
-    dispatch(getAllUsers());
+    const initialSetup = async () => {
+      dispatch(getAllPosts());
+      dispatch(getAllUsers());
+    };
+
+    initialSetup();
   }, []);
 
   return (
