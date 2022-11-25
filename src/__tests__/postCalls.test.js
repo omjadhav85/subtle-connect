@@ -4,13 +4,30 @@ import {
   initialState,
 } from "../features/Home/postsSlice";
 import axios from "axios";
-import { store } from "../app/store";
+// import { store } from "../app/store";
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../features/Authentication/authSlice";
+import postsReducer from "../features/Home/postsSlice";
+import usersReducer from "../features/Profile/usersSlice";
 
 jest.mock("axios");
 
 describe("this test is for all api calls on post actions", () => {
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OTAwY2NjZC1kNmI1LTQyZTQtOGYyNy0wYzIzYjA0YTU5ZmMiLCJ1c2VybmFtZSI6Im9ta2FyamFkaGF2In0.pjto7VpnUieH2pzCpgq6s12bBaUqNNDko0umzf7nIoE";
+
+  let store = null;
+
+  // Create a new instace of store before running every test
+  beforeEach(() => {
+    store = configureStore({
+      reducer: {
+        auth: authReducer,
+        posts: postsReducer,
+        users: usersReducer,
+      },
+    });
+  });
 
   test("this api should set the postsStatus as pending and start fetching posts", async () => {
     //  set mock response first, though we wont be needing it for "pending" test
@@ -128,6 +145,7 @@ describe("this test is for all api calls on post actions", () => {
 
     // Now check if our state has updated or not
     const state = store.getState().posts;
+
     expect(state).toEqual({
       allPosts: expectedState,
       postsStatus: "fulfilled",
@@ -169,8 +187,6 @@ describe("this test is for all api calls on post actions", () => {
       id: "6",
     };
 
-    console.log("before adding:", store.getState());
-
     // mocking api get call response with our own data
     axios.mockResolvedValue({ data: { posts: expectedState } });
 
@@ -188,7 +204,6 @@ describe("this test is for all api calls on post actions", () => {
     expect(allPosts).toEqual(expectedState);
 
     // Now check if our state has updated or not
-    console.log("after adding:", store.getState());
     const state = store.getState().posts;
     expect(state).toEqual({
       allPosts: expectedState,
