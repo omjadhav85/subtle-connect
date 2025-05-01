@@ -21,6 +21,8 @@ export const FollowBarItem = ({ user }) => {
     <div className="flex items-center gap-2 border-b pb-2 ">
       <CircleAvatar
         imgSrc={user.image}
+        firstName={user.firstName}
+        lastName={user.lastName}
         onClickHandler={() => navigate(`/profile/${user._id}`)}
         otherClasses="cursor-pointer"
       />

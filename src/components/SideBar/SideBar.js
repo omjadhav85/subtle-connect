@@ -79,7 +79,11 @@ export const SideBar = () => {
         />
       </div>
       <div className="flex items-center gap-2">
-        <CircleAvatar imgSrc={userData.image} />
+        <CircleAvatar
+          imgSrc={userData.image}
+          firstName={userData.firstName}
+          lastName={userData.lastName}
+        />
         <div className="flex-1">
           <h1 className="font-semibold">{`${userData.firstName} ${userData.lastName}`}</h1>
           <small>{`@${userData.username}`}</small>

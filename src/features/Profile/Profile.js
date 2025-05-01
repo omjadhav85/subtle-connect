@@ -67,6 +67,8 @@ export const Profile = () => {
       <section className="flex flex-col items-center gap-2 bg-white rounded-md py-4">
         <CircleAvatar
           imgSrc={image}
+          firstName={firstName}
+          lastName={lastName}
           otherClasses="w-32 h-32 border border-primary"
         />
         <h1 className="text-xl font-bold">{`${firstName} ${lastName}`}</h1>

@@ -54,6 +54,8 @@ export const EditProfile = ({ setShowEditProfile }) => {
           <div className="flex justify-center relative">
             <CircleAvatar
               imgSrc={editDetails.image}
+              firstName={editDetails.firstName}
+              lastName={editDetails.lastName}
               otherClasses="w-32 h-32 border border-primary cursor-pointer"
             />
             <input

@@ -41,7 +41,11 @@ export const NewPost = ({ oldPost, setShowModal }) => {
 
   return (
     <div className="flex h-40 gap-4 bg-white p-4 rounded-md">
-      <CircleAvatar imgSrc={userData.image} />
+      <CircleAvatar
+        imgSrc={userData.image}
+        firstName={userData.firstName}
+        lastName={userData.lastName}
+      />
       <form className="flex-1 flex flex-col gap-4" onSubmit={addNoteHandler}>
         <textarea
           name=""

@@ -22,6 +22,8 @@ export const Comment = ({ comment, post }) => {
     <div className="flex gap-4 items-center">
       <CircleAvatar
         imgSrc={allUsers[comment.username]?.image}
+        firstName={allUsers[comment.username]?.firstName}
+        lastName={allUsers[comment.username]?.lastName}
         otherClasses="w-10 h-10 cursor-pointer"
         onClickHandler={() =>
           navigate(`/profile/${allUsers[comment.username]._id}`)

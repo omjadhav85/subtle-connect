@@ -76,6 +76,8 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
       <div className="flex gap-2">
         <CircleAvatar
           imgSrc={allUsers[username]?.image}
+          firstName={allUsers[username]?.firstName}
+          lastName={allUsers[username]?.lastName}
           onClickHandler={() => navigate(`/profile/${allUsers[username]._id}`)}
           otherClasses="cursor-pointer"
         />
@@ -142,7 +144,12 @@ export const Post = ({ post, setShowModal, setOldPost }) => {
         </div>
       </div>
       <div className="flex gap-4 items-center">
-        <CircleAvatar imgSrc={userData?.image} otherClasses="w-10 h-10" />
+        <CircleAvatar
+          imgSrc={userData?.image}
+          firstName={userData?.firstName}
+          lastName={userData?.lastName}
+          otherClasses="w-10 h-10"
+        />
         <form className="flex-1" onSubmit={(e) => handleAddComment(e)}>
           <Input
             type="text"
